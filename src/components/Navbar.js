@@ -9,14 +9,15 @@ import { useProductsContext } from '../context/products_context';
 import { useUserContext } from '../context/user_context';
 
 const Nav = () => {
+  const { openSiderbar } = useProductsContext();
   return (
     <NavContainer>
       <div className='nav-center'>
         <div className='nav-header'>
           <Link to='/'>
-            <img src={logo} alt='comfy sloth' />
+            <img src={logo} alt='TE' />
           </Link>
-          <button className='nav-toggle' type='button'>
+          <button className='nav-toggle' type='button' onClick={openSiderbar}>
             <FaBars />
           </button>
         </div>

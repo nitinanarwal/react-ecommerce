@@ -25,7 +25,7 @@ function App() {
           <About />
         </Route>
         <Route path='/cart' exact={true}>
-          <cart />
+          <Cart />
         </Route>
         <Route path='/products' exact={true}>
           <Products />
