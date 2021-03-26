@@ -15,22 +15,40 @@ import {
 
 const initialState = {
   isSidebarOpen: false,
+  products_loading: false,
+  products_error: false,
+  products: [],
+  featured_products: [],
 };
 
 const ProductsContext = React.createContext();
 
 export const ProductsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
   const openSiderbar = () => {
     dispatch({ type: SIDEBAR_OPEN });
   };
+
   const closeSidebar = () => {
     dispatch({ type: SIDEBAR_CLOSE });
   };
 
-  // useEffect(() => {
-  //   closeSidebar();
-  // }, []);
+  const fetchProducts = async (url) => {
+    dispatch({ type: GET_PRODUCTS_BEGIN });
+    try {
+      const response = await axios.get(url);
+      const products = await response.data;
+      dispatch({ type: GET_PRODUCTS_SUCCESS, payload: products });
+    } catch (error) {
+      dispatch({ type: GET_PRODUCTS_ERROR });
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts(url);
+  }, []);
+
   return (
     <ProductsContext.Provider value={{ ...state, openSiderbar, closeSidebar }}>
       {children}
