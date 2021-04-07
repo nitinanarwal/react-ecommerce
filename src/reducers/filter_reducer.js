@@ -7,11 +7,18 @@ import {
   UPDATE_FILTERS,
   FILTER_PRODUCTS,
   CLEAR_FILTERS,
-} from '../actions'
+} from '../actions';
 
 const filter_reducer = (state, action) => {
-  return state
-  throw new Error(`No Matching "${action.type}" - action type`)
-}
+  if (action.type === LOAD_PRODUCTS) {
+    // Use payload as spread operator to copy the file to avoid trouble with filtered_prducts to all_product as its reference to memory(new instance)
+    return {
+      ...state,
+      filtered_products: [...action.payload],
+      all_products: [...action.payload],
+    };
+  }
+  throw new Error(`No Matching "${action.type}" - action type`);
+};
 
-export default filter_reducer
+export default filter_reducer;
