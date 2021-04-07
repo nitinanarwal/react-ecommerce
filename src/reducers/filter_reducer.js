@@ -11,11 +11,16 @@ import {
 
 const filter_reducer = (state, action) => {
   if (action.type === LOAD_PRODUCTS) {
+    let maxPrice = action.payload.map((p) => p.price);
+    maxPrice = Math.max(...maxPrice);
     // Use payload as spread operator to copy the file to avoid trouble with filtered_prducts to all_product as its reference to memory(new instance)
     return {
       ...state,
       filtered_products: [...action.payload],
+      // save value to reset filters
       all_products: [...action.payload],
+      // save old values by spread operater otherwise overide them
+      filters: { ...state.filters, maxPrice: maxPrice, price: maxPrice },
     };
   }
   if (action.type === SET_GRIDVIEW) {
@@ -49,6 +54,14 @@ const filter_reducer = (state, action) => {
       });
     }
     return { ...state, filtered_products: tempProducts };
+  }
+  if (action.type === UPDATE_FILTERS) {
+    const { name, value } = action.payload;
+    return { ...state, filters: { ...state.filters, [name]: value } };
+  }
+  if (action.type === FILTER_PRODUCTS) {
+    const { filters, filtered_products } = state;
+    return { ...state };
   }
   throw new Error(`No Matching "${action.type}" - action type`);
 };
