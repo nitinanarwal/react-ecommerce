@@ -28,7 +28,7 @@ const Filters = () => {
     <Wrapper>
       <div className='content'>
         <form onSubmit={(e) => e.preventDefault()}>
-          {/* search input */}
+          {/* search text input */}
           <div className='form-control'>
             <input
               type='text'
@@ -40,7 +40,7 @@ const Filters = () => {
             />
           </div>
           {/* end of search */}
-          {/* categories */}
+          {/* categories button */}
           <div className='form-control'>
             <h5>Category</h5>
             <div>
@@ -62,7 +62,7 @@ const Filters = () => {
             </div>
           </div>
           {/* end of categories */}
-          {/* companies */}
+          {/* companies dropdown*/}
           <div className='form-control'>
             <h5>company</h5>
             <select
@@ -82,7 +82,7 @@ const Filters = () => {
             </select>
           </div>
           {/* end og companies */}
-          {/* colors */}
+          {/* colors text and button */}
           <div className='form-control'>
             <h5>colors</h5>
             <div className='colors'>
@@ -122,7 +122,7 @@ const Filters = () => {
             </div>
           </div>
           {/* end of colors */}
-          {/* price */}
+          {/* price range */}
           <div className='form-control'>
             <h5>price</h5>
             <p className='price'>{formatPrice(price)}</p>
@@ -136,7 +136,7 @@ const Filters = () => {
             />
           </div>
           {/* end of price */}
-          {/* shipping */}
+          {/* shipping checkbox */}
           <div className='form-control shipping'>
             <label htmlFor='shipping'>free shipping</label>
             <input
