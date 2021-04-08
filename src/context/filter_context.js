@@ -25,7 +25,7 @@ const initialState = {
     maxPrice: 0,
     minPrice: 0,
     price: 0,
-    shipping: true,
+    shipping: false,
   },
 };
 
@@ -63,10 +63,32 @@ export const FilterProvider = ({ children }) => {
 
   const updateFilters = (e) => {
     let name = e.target.name;
+    // Text input
     let value = e.target.value;
+
+    if (name === 'category') {
+      //Button
+      value = e.target.textContent;
+    }
+    if (name === 'colors') {
+      // Button with data value
+      value = e.target.dataset.color;
+    }
+    if (name === 'price') {
+      // Range return string so convert into number
+      value = Number(value);
+    }
+    if (name === 'shipping') {
+      // checkbox
+      value = e.target.checked;
+    }
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
-  const clearFilter = () => {};
+
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTERS });
+  };
+
   return (
     <FilterContext.Provider
       value={{

@@ -11,6 +11,7 @@ import {
 
 const filter_reducer = (state, action) => {
   if (action.type === LOAD_PRODUCTS) {
+    // get maximum price
     let maxPrice = action.payload.map((p) => p.price);
     maxPrice = Math.max(...maxPrice);
     // Use payload as spread operator to copy the file to avoid trouble with filtered_prducts to all_product as its reference to memory(new instance)
@@ -60,8 +61,22 @@ const filter_reducer = (state, action) => {
     return { ...state, filters: { ...state.filters, [name]: value } };
   }
   if (action.type === FILTER_PRODUCTS) {
-    const { filters, filtered_products } = state;
     return { ...state };
+  }
+  if (action.type === CLEAR_FILTERS) {
+    // max price, min price,price from old state
+    return {
+      ...state,
+      filters: {
+        ...state.filters,
+        text: '',
+        company: 'all',
+        category: 'all',
+        colors: 'all',
+        price: state.filters.maxPrice,
+        shipping: false,
+      },
+    };
   }
   throw new Error(`No Matching "${action.type}" - action type`);
 };
