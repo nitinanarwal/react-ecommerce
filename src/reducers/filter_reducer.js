@@ -57,11 +57,53 @@ const filter_reducer = (state, action) => {
     return { ...state, filtered_products: tempProducts };
   }
   if (action.type === UPDATE_FILTERS) {
+    // dynamic key value pair change
     const { name, value } = action.payload;
     return { ...state, filters: { ...state.filters, [name]: value } };
   }
   if (action.type === FILTER_PRODUCTS) {
-    return { ...state };
+    // setup defualt values
+    const { all_products } = state;
+    const { text, category, company, colors, price, shipping } = state.filters;
+
+    let tempProducts = [...all_products];
+    //filtering
+    //text
+    if (text) {
+      tempProducts = tempProducts.filter((product) => {
+        return product.name.toLowerCase().startsWith(text);
+      });
+    }
+    //company
+    if (company !== 'all') {
+      tempProducts = tempProducts.filter(
+        (product) => product.company === company
+      );
+    }
+    // category
+    if (category !== 'all') {
+      tempProducts = tempProducts.filter(
+        (product) => product.category === category
+      );
+    }
+    //color
+    if (colors !== 'all') {
+      tempProducts = tempProducts.filter((product) => {
+        return product.colors.find((c) => c === colors);
+      });
+    }
+    //price
+    if (price) {
+      tempProducts = tempProducts.filter((product) => product.price <= price);
+    }
+
+    //shipping
+    if (shipping) {
+      tempProducts = tempProducts.filter(
+        (product) => product.shipping === true
+      );
+    }
+    return { ...state, filtered_products: tempProducts };
   }
   if (action.type === CLEAR_FILTERS) {
     // max price, min price,price from old state
