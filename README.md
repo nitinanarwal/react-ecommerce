@@ -1,9 +1,9 @@
-#### React Version
+#### Current React Version
 
 ```
-"react": "^16.13.1",
-"react-dom": "^16.13.1",
-"react-scripts": "3.4.3",
+"react": "^17.0.1",
+"react-dom": "^17.0.1",
+"react-scripts": "4.0.0",
 ```
 
 ### FormSpree For Newsletter
