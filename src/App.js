@@ -35,9 +35,9 @@ function App() {
           exact={true}
           children={<SingleProduct />}
         ></Route>
-        <Route path='/checkout' exact={true}>
+        <PrivateRoute path='/checkout' exact={true}>
           <Checkout />
-        </Route>
+        </PrivateRoute>
         <Route path='*' exact={true}>
           <Error />
         </Route>
