@@ -33,7 +33,7 @@ function App() {
           <Route exact path='/products'>
             <Products />
           </Route>
-          <Route exact path='/products/:id' children={<SingleProduct />} />
+          <Route exact path='/product/:id' children={<SingleProduct />} />
           <PrivateRoute exact path='/checkout'>
             <Checkout />
           </PrivateRoute>
