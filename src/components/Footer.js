@@ -8,6 +8,7 @@ const Footer = () => {
         <a
           href='https://www.techechelons.com/'
           target='_blank'
+          rel='noreferrer'
           alt='techechelons'
         >
           <span> TECHECHELONS</span>
